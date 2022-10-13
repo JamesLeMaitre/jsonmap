@@ -15,14 +15,6 @@ public class MapjsonApplication {
         SpringApplication.run(MapjsonApplication.class, args);
     }
 
-    @Bean
-    public PhysicalNamingStrategy physical() {
-        return new PhysicalNamingStrategyStandardImpl();
-    }
 
-    @Bean
-    public ImplicitNamingStrategy implicit() {
-        return new ImplicitNamingStrategyLegacyJpaImpl();
-    }
 
 }

@@ -28,10 +28,10 @@ public class customers {
     private String customer_attribute_json;
 
     @Convert(converter = HashMapConverter.class)
-    private Map<String, Object> customerAttributes;
+    private Map<String, Object[]> customerAttributes;
 
 
-    public void setCustomerAttributes(Map<String, Object> customerAttributes) {
+    public void setCustomerAttributes(Map<String, Object[]> customerAttributes) {
         this.customerAttributes = customerAttributes;
     }
 

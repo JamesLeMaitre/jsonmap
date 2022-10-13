@@ -1,31 +1,44 @@
 package dev.jtm.mapjson.servicesimpl;
 
+import dev.jtm.mapjson.entities.DataRequest;
 import dev.jtm.mapjson.entities.customers;
+import dev.jtm.mapjson.repositories.CustomerRepository;
 import dev.jtm.mapjson.services.CustomerService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
+    private final CustomerRepository customerRepository;
     @Override
     public customers saveCustomer() throws IOException {
         customers customer = new customers();
         customer.setFirst_name("first name");
         customer.setLast_name("last name");
 
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("address", "123 Main Street");
-        attributes.put("zipcode", 12345);
+        Map<String, Object[]> attributes = new HashMap<>();
+        DataRequest[] tab = new DataRequest[2];
+        for(int i=0; i<tab.length; i++){
+            tab[i] = new DataRequest("Name" + i,"address "+ i);
+        }
+
+        attributes.put("libelle",tab);
+       /* attributes.put("description", "description");
+        attributes.put("comment","comment");*/
 
         customer.setCustomerAttributes(attributes);
 
         customer.serializeCustomerAttributes();
-        return customer ;
+        return customerRepository.save(customer) ;
 
         /*String serialized = customer.getCustomerAttributeJSON();
 
@@ -36,4 +49,6 @@ public class CustomerServiceImpl implements CustomerService {
 
         assertEquals("123 Main Street", deserialized.get("address"));*/
     }
+
+
 }
