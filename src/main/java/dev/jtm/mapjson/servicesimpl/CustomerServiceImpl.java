@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
         Map<String, Object[]> attributes = new HashMap<>();
         DataRequest[] tab = new DataRequest[2];
         for(int i=0; i<tab.length; i++){
-            tab[i] = new DataRequest("Name" + i,"address "+ i);
+            tab[i] = new DataRequest(customer.getFirst_name(),"address "+ i);
         }
 
         attributes.put("libelle",tab);
